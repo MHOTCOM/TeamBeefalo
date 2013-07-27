@@ -44,7 +44,9 @@ local fn = function(inst)
 	-- a minimap icon must be specified
 	inst.MiniMapEntity:SetIcon( "wilson.png" )
 
-	-- todo: Add an example special power here.
+	-- Allow freezing time to be doubled
+        inst.components.Freezable:SetResist(TUNING.FREEZING_KILL_TIME)
+
 end
 
 
@@ -52,18 +54,17 @@ end
 
 -- First up, the character select screen lines 
 -- note: these are lower-case character name
-STRINGS.CHARACTER_TITLES.zenel = "The Sap"
+STRINGS.CHARACTER_TITLES.zenel = "The Coder"
 STRINGS.CHARACTER_NAMES.zenel = "Zenel"
 STRINGS.CHARACTER_DESCRIPTIONS.zenel = "* I am one with the demons."
-STRINGS.CHARACTER_QUOTES.zenel = "\"A la chingada\""
+STRINGS.CHARACTER_QUOTES.zenel = "\"¡A la chingada!\""
 
 -- You can also add any kind of custom dialogue that you would like. Don't forget to make
 -- categores that don't exist yet using = {}
 -- note: these are UPPER-CASE charcacter name
 STRINGS.CHARACTERS.ZENEL = {}
 STRINGS.CHARACTERS.ZENEL.DESCRIBE = {}
-STRINGS.CHARACTERS.ZENEL.DESCRIBE.EVERGREEN = "Reminds me of home :( ."
-
+STRINGS.CHARACTERS.ZENEL.DESCRIBE.EVERGREEN = "Reminds me of home \:( ."
 
 
 return MakePlayerCharacter("zenel", prefabs, assets, fn)
