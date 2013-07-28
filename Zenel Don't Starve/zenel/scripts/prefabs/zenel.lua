@@ -36,6 +36,21 @@ local assets = {
 }
 local prefabs = {}
 
+
+local function onFreezingChange(inst, data)
+        local freezing = false
+        if (inst.components.temperature.current < 0) then
+                freezing = true
+        end
+        -- If actually freezing, make super cold
+        if (freezing) then
+                inst.components.combat.damagemultiplier = .25
+        else 
+                inst.components.combat.damagemultiplier = 1
+        end
+
+end
+
 local fn = function(inst)
         
         -- choose which sounds this character will play
@@ -45,10 +60,11 @@ local fn = function(inst)
         inst.MiniMapEntity:SetIcon( "wilson.png" )
 
         -- Double the cold resistance, equivalent to about a puffy vest and a little bit.
-        inst.components.temperature.inherentinsulation = TUNING.INSULATION_LARGE + 10 -- 250
+        -- inst.components.temperature.inherentinsulation = TUNING.INSULATION_LARGE + 10 -- 250
 
-        -- 1/4 damage if cold
-        --inst.compnents.combat.damagemultiplier =
+        inst:ListenForEvent("temperaturedelta", onFreezingChange)
+
+
 end
 
 
@@ -58,7 +74,7 @@ end
 -- note: these are lower-case character name
 STRINGS.CHARACTER_TITLES.zenel = "The Coder"
 STRINGS.CHARACTER_NAMES.zenel = "Zenel"
-STRINGS.CHARACTER_DESCRIPTIONS.zenel = "* I am one with the demons.\n* More resistant to the cold."
+STRINGS.CHARACTER_DESCRIPTIONS.zenel = "* I am one with the demons.\n* More resistant to the cold.\n* Very weak when cold."
 STRINGS.CHARACTER_QUOTES.zenel = "\"¡A la chingada!\""
 
 -- You can also add any kind of custom dialogue that you would like. Don't forget to make
