@@ -31,22 +31,24 @@ local assets = {
         Asset( "SOUND", "sound/wilson.fsb" ),
         Asset( "ANIM", "anim/beard.zip" ),
 
-		-- Don't forget to include your character's custom assets!
+                -- Don't forget to include your character's custom assets!
         Asset( "ANIM", "anim/zenel.zip" ),
 }
 local prefabs = {}
 
 local fn = function(inst)
-	
-	-- choose which sounds this character will play
-	inst.soundsname = "wilson"
+        
+        -- choose which sounds this character will play
+        inst.soundsname = "wilson"
 
-	-- a minimap icon must be specified
-	inst.MiniMapEntity:SetIcon( "wilson.png" )
+        -- a minimap icon must be specified
+        inst.MiniMapEntity:SetIcon( "wilson.png" )
 
-	-- Allow freezing time to be doubled
-        inst.components.Freezable:SetResist(TUNING.FREEZING_KILL_TIME)
+        -- Double the cold resistance, equivalent to about a puffy vest and a little bit.
+        inst.components.temperature.inherentinsulation = TUNING.INSULATION_LARGE + 10 -- 250
 
+        -- 1/4 damage if cold
+        --inst.compnents.combat.damagemultiplier =
 end
 
 
@@ -56,7 +58,7 @@ end
 -- note: these are lower-case character name
 STRINGS.CHARACTER_TITLES.zenel = "The Coder"
 STRINGS.CHARACTER_NAMES.zenel = "Zenel"
-STRINGS.CHARACTER_DESCRIPTIONS.zenel = "* I am one with the demons."
+STRINGS.CHARACTER_DESCRIPTIONS.zenel = "* I am one with the demons.\n* More resistant to the cold."
 STRINGS.CHARACTER_QUOTES.zenel = "\"¡A la chingada!\""
 
 -- You can also add any kind of custom dialogue that you would like. Don't forget to make
