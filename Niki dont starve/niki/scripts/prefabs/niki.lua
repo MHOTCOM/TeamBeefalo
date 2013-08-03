@@ -45,6 +45,9 @@ local fn = function(inst)
 	inst.MiniMapEntity:SetIcon( "wilson.png" )
 
 	-- todo: Add an example special power here.
+
+	--Remove scary to prey tag to allow play to get close to birds and rabbits
+	inst:RemoveTag("scarytoprey")
 end
 
 
