@@ -46,8 +46,11 @@ local fn = function(inst)
 
 	-- todo: Add an example special power here.
 
-	--Remove scary to prey tag to allow play to get close to birds and rabbits
+	-- Remove scary to prey tag to allow play to get close to birds and rabbits
 	inst:RemoveTag("scarytoprey")
+
+	-- Add beefalo tag to keep beefalo from attacking during mating season
+	inst:AddTag("beefalo")
 end
 
 
