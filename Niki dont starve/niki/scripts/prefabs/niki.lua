@@ -36,6 +36,14 @@ local assets = {
 }
 local prefabs = {}
 
+local badAnimalsToKill = {"rabbit", "beefalo"}
+
+local function killedSomething(inst, data)
+	-- THIS STILL DOES NOT WORK 
+	-- I DON'T KNOW WHY I CAN'T GET THE VICTIM OF THE ATTACK?!
+	print("Got killed event! Inst: ", inst)
+end
+
 local fn = function(inst)
 	
 	-- choose which sounds this character will play
@@ -51,6 +59,8 @@ local fn = function(inst)
 
 	-- Add beefalo tag to keep beefalo from attacking during mating season
 	inst:AddTag("beefalo")
+
+	inst:ListenForEvent("killed", killedSomething)
 end
 
 
