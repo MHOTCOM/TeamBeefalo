@@ -60,7 +60,7 @@ local fn = function(inst)
         inst.MiniMapEntity:SetIcon( "wilson.png" )
 
         -- Double the cold resistance, equivalent to about a puffy vest and a little bit.
-        -- inst.components.temperature.inherentinsulation = TUNING.INSULATION_LARGE + 10 -- 250
+        inst.components.temperature.inherentinsulation = TUNING.INSULATION_LARGE + 10 -- 250
 
         inst:ListenForEvent("temperaturedelta", onFreezingChange)
 
