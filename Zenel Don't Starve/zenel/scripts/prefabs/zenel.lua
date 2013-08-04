@@ -54,11 +54,15 @@ local function onFreezingChange(inst, data)
         local zeroAdjustedCurrent = inst.components.temperature.current - inst.components.temperature.mintemp
         if (zeroAdjustedCurrent >= 50) then
             multiplier = minMultiplier
+            inst.components.talker:Say("Oh my GOD it's so hot out. I feel so weak...")
         elseif (zeroAdjustedCurrent <= 10) then
             multiplier = maxMultiplier
+            inst.components.talker:Say("The winter's power fills me, I AM MIGHTY!")
         elseif (zeroAdjustedCurrent > 10 or zeroAdjustedCurrent <= 30) then
+            inst.components.talker:Say("Ahh, the cold is here. I feel my strength returning to me.")
             multiplier = (-1/20) * zeroAdjustedCurrent + 2.5
         elseif (zeroAdjustedCurrent > 30 and zeroAdjustedCurrent < 50) then
+            inst.components.talker:Say("Awh man, it's getting warmer... I feel my power leaving me.")
             multiplier = (-1/40) * zeroAdjustedCurrent + 1.75
         end
         inst.components.combat.damagemultiplier = multipler
