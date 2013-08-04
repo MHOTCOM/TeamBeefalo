@@ -52,23 +52,37 @@ local function onFreezingChange(inst, data)
         local minMultiplier = .5
         local maxMultiplier = 2
         local zeroAdjustedCurrent = inst.components.temperature.current - inst.components.temperature.mintemp
+        local multiplier = 0
         if (zeroAdjustedCurrent >= 50) then
             multiplier = minMultiplier
-            inst.components.talker:Say("Oh my GOD it's so hot out. I feel so weak...")
+            if (currentState ~= "Hot") then
+                currentState = "Hot"
+                inst.components.talker:Say("Oh my GOD it's so hot out. I feel so weak...")
+            end
         elseif (zeroAdjustedCurrent <= 10) then
             multiplier = maxMultiplier
-            inst.components.talker:Say("The winter's power fills me, I AM MIGHTY!")
-        elseif (zeroAdjustedCurrent > 10 or zeroAdjustedCurrent <= 30) then
-            inst.components.talker:Say("Ahh, the cold is here. I feel my strength returning to me.")
+            if (currentState ~= "Cold") then
+                currentState = "Cold"
+                inst.components.talker:Say("The winter's power fills me, I AM MIGHTY!")
+            end
+        elseif (zeroAdjustedCurrent > 10 and zeroAdjustedCurrent <= 30) then
             multiplier = (-1/20) * zeroAdjustedCurrent + 2.5
+            if (currentState ~= "LittleCold") then
+                currentState = "LittleCold"
+                inst.components.talker:Say("Ahh, the cold is here. I feel my strength returning to me.")
+            end
         elseif (zeroAdjustedCurrent > 30 and zeroAdjustedCurrent < 50) then
-            inst.components.talker:Say("Awh man, it's getting warmer... I feel my power leaving me.")
             multiplier = (-1/40) * zeroAdjustedCurrent + 1.75
+            if (currentState ~= "LittleHot") then
+                currentState = "LittleHot"
+                inst.components.talker:Say("Awh man, it's getting warmer... I feel my power leaving me.")
+            end
         end
-        inst.components.combat.damagemultiplier = multipler
-        print("Set multiplier to " ..multiplier)
-
+        inst.components.combat.damagemultiplier = multiplier
+        print("Set multiplier to " .. multiplier .. " State: " .. currentState)
 end
+
+currentState = "None"
 
 local fn = function(inst)
         
@@ -78,8 +92,7 @@ local fn = function(inst)
         -- a minimap icon must be specified
         inst.MiniMapEntity:SetIcon( "wilson.png" )
 
-        -- Double the cold resistance, equivalent to about a puffy vest and a little bit.
-        inst.components.temperature.inherentinsulation = TUNING.INSULATION_LARGE + 10 -- 250
+
 
         inst:ListenForEvent("temperaturedelta", onFreezingChange)
 
