@@ -3,36 +3,6 @@ local MakePlayerCharacter = require "prefabs/player_common"
 
 
 local assets = {
-
-        Asset( "ANIM", "anim/player_basic.zip" ),
-        -- An ice troll should not shiver in the cold...
-        -- Asset( "ANIM", "anim/player_idles_shiver.zip" ),
-        Asset( "ANIM", "anim/player_actions.zip" ),
-        Asset( "ANIM", "anim/player_actions_axe.zip" ),
-        Asset( "ANIM", "anim/player_actions_pickaxe.zip" ),
-        Asset( "ANIM", "anim/player_actions_shovel.zip" ),
-        Asset( "ANIM", "anim/player_actions_blowdart.zip" ),
-        Asset( "ANIM", "anim/player_actions_eat.zip" ),
-        Asset( "ANIM", "anim/player_actions_item.zip" ),
-        Asset( "ANIM", "anim/player_actions_uniqueitem.zip" ),
-        Asset( "ANIM", "anim/player_actions_bugnet.zip" ),
-        Asset( "ANIM", "anim/player_actions_fishing.zip" ),
-        Asset( "ANIM", "anim/player_actions_boomerang.zip" ),
-        Asset( "ANIM", "anim/player_bush_hat.zip" ),
-        Asset( "ANIM", "anim/player_attacks.zip" ),
-        Asset( "ANIM", "anim/player_idles.zip" ),
-        Asset( "ANIM", "anim/player_rebirth.zip" ),
-        Asset( "ANIM", "anim/player_jump.zip" ),
-        Asset( "ANIM", "anim/player_amulet_resurrect.zip" ),
-        Asset( "ANIM", "anim/player_teleport.zip" ),
-        Asset( "ANIM", "anim/wilson_fx.zip" ),
-        Asset( "ANIM", "anim/player_one_man_band.zip" ),
-        Asset( "ANIM", "anim/shadow_hands.zip" ),
-        Asset( "SOUND", "sound/sfx.fsb" ),
-        Asset( "SOUND", "sound/wilson.fsb" ),
-        -- No beard for me.
-        -- Asset( "ANIM", "anim/beard.zip" ),
-
         -- Don't forget to include your character's custom assets!
         Asset( "ANIM", "anim/zenel.zip" ),
 }
@@ -53,24 +23,36 @@ local function onFreezingChange(inst, data)
 
         local minMultiplier = .5
         local maxMultiplier = 2
-        local zeroAdjustedCurrent = inst.components.temperature.current - inst.components.temperature.mintemp
+        local zeroAdjustedCurrent = inst.components.temperature.current + inst.components.temperature.mintemp
         local multiplier = 1
         if (zeroAdjustedCurrent >= 50) then
             multiplier = minMultiplier
             if (currentState ~= "Hot") then
                 currentState = "Hot"
+                if (skipSaying) then
+                    skipSaying = false
+                    return
+                end
                 inst.components.talker:Say("Oh my GOD it's so hot out. I feel so weak...")
             end
         elseif (zeroAdjustedCurrent <= 10) then
             multiplier = maxMultiplier
             if (currentState ~= "Cold") then
                 currentState = "Cold"
+                if (skipSaying) then
+                    skipSaying = false
+                    return 
+                end
                 inst.components.talker:Say("The winter's power fills me, I AM MIGHTY!")
             end
         elseif (zeroAdjustedCurrent > 10 and zeroAdjustedCurrent <= 30) then
             multiplier = (-1/20) * zeroAdjustedCurrent + 2.5
             if (currentState ~= "LittleCold") then
                 currentState = "LittleCold"
+                if (skipSaying) then 
+                    skipSaying = false
+                    return
+                end
                 if (lastState ~= "Cold") then
                     inst.components.talker:Say("Ahh, the cold is here. I feel my strength returning to me.")
                 else 
@@ -82,6 +64,10 @@ local function onFreezingChange(inst, data)
             multiplier = (-1/40) * zeroAdjustedCurrent + 1.75
             if (currentState ~= "LittleHot") then
                 currentState = "LittleHot"
+                if (skipSaying) then
+                    skipSaying = false
+                    return
+                end
                 if (lastState ~= "Hot") then
                     inst.components.talker:Say("Awh man, it's getting warmer... I feel my power leaving me.")
                 else 
@@ -91,11 +77,12 @@ local function onFreezingChange(inst, data)
         end
         inst.components.combat.damagemultiplier = multiplier
         lastState = currentState
-        print("Set multiplier to " .. multiplier .. " State: " .. currentState)
+        print("Set multiplier to " .. multiplier .. " State: " .. currentState .. " Temp: " .. zeroAdjustedCurrent)
 end
 
 currentState = "None"
 lastState = "None"
+skipSaying = true
 
 local fn = function(inst)
         
@@ -107,6 +94,10 @@ local fn = function(inst)
 
         -- Negate cold damage
         inst.components.temperature.hurtrate = 0
+
+        -- Setup temperature to never say that character is freezing
+        inst.components.temperature.mintemp = 5
+        inst.components.temperature.maxtemp = 65
 
         inst:ListenForEvent("temperaturedelta", onFreezingChange)
 
