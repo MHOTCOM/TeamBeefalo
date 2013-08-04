@@ -52,7 +52,7 @@ local function onFreezingChange(inst, data)
         local minMultiplier = .5
         local maxMultiplier = 2
         local zeroAdjustedCurrent = inst.components.temperature.current - inst.components.temperature.mintemp
-        local multiplier = 0
+        local multiplier = 1
         if (zeroAdjustedCurrent >= 50) then
             multiplier = minMultiplier
             if (currentState ~= "Hot") then
@@ -69,20 +69,31 @@ local function onFreezingChange(inst, data)
             multiplier = (-1/20) * zeroAdjustedCurrent + 2.5
             if (currentState ~= "LittleCold") then
                 currentState = "LittleCold"
-                inst.components.talker:Say("Ahh, the cold is here. I feel my strength returning to me.")
+                if (lastState ~= "Cold") then
+                    inst.components.talker:Say("Ahh, the cold is here. I feel my strength returning to me.")
+                else 
+                    inst.components.talker:Say("I'm warming up! I'm losing power!")
+                end
+
             end
         elseif (zeroAdjustedCurrent > 30 and zeroAdjustedCurrent < 50) then
             multiplier = (-1/40) * zeroAdjustedCurrent + 1.75
             if (currentState ~= "LittleHot") then
                 currentState = "LittleHot"
-                inst.components.talker:Say("Awh man, it's getting warmer... I feel my power leaving me.")
+                if (lastState ~= "Hot") then
+                    inst.components.talker:Say("Awh man, it's getting warmer... I feel my power leaving me.")
+                else 
+                    inst.components.talker:Say("At least it's a little bit cooler. I feel a little bit better.")
+                end
             end
         end
         inst.components.combat.damagemultiplier = multiplier
+        lastState = currentState
         print("Set multiplier to " .. multiplier .. " State: " .. currentState)
 end
 
 currentState = "None"
+lastState = "None"
 
 local fn = function(inst)
         
@@ -92,7 +103,8 @@ local fn = function(inst)
         -- a minimap icon must be specified
         inst.MiniMapEntity:SetIcon( "wilson.png" )
 
-
+        -- Negate cold damage
+        inst.components.temperature.hurtrate = 0
 
         inst:ListenForEvent("temperaturedelta", onFreezingChange)
 
