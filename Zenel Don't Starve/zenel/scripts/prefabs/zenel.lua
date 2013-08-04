@@ -5,7 +5,8 @@ local MakePlayerCharacter = require "prefabs/player_common"
 local assets = {
 
         Asset( "ANIM", "anim/player_basic.zip" ),
-        Asset( "ANIM", "anim/player_idles_shiver.zip" ),
+        -- An ice troll should not shiver in the cold...
+        -- Asset( "ANIM", "anim/player_idles_shiver.zip" ),
         Asset( "ANIM", "anim/player_actions.zip" ),
         Asset( "ANIM", "anim/player_actions_axe.zip" ),
         Asset( "ANIM", "anim/player_actions_pickaxe.zip" ),
@@ -29,9 +30,10 @@ local assets = {
         Asset( "ANIM", "anim/shadow_hands.zip" ),
         Asset( "SOUND", "sound/sfx.fsb" ),
         Asset( "SOUND", "sound/wilson.fsb" ),
-        Asset( "ANIM", "anim/beard.zip" ),
+        -- No beard for me.
+        -- Asset( "ANIM", "anim/beard.zip" ),
 
-                -- Don't forget to include your character's custom assets!
+        -- Don't forget to include your character's custom assets!
         Asset( "ANIM", "anim/zenel.zip" ),
 }
 local prefabs = {}
@@ -98,7 +100,7 @@ lastState = "None"
 local fn = function(inst)
         
         -- choose which sounds this character will play
-        inst.soundsname = "wilson"
+        inst.soundsname = "wolfgang"
 
         -- a minimap icon must be specified
         inst.MiniMapEntity:SetIcon( "wilson.png" )
