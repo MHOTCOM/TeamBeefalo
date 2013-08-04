@@ -38,16 +38,31 @@ local prefabs = {}
 
 
 local function onFreezingChange(inst, data)
-        local freezing = false
-        if (inst.components.temperature.current < 0) then
-                freezing = true
+        -- local freezing = false
+        -- if (inst.components.temperature.current < 0) then
+        --         freezing = true
+        -- end
+        -- -- If actually freezing, make super cold
+        -- if (freezing) then
+        --         inst.components.combat.damagemultiplier = .25
+        -- else 
+        --         inst.components.combat.damagemultiplier = 1
+        -- end
+
+        local minMultiplier = .5
+        local maxMultiplier = 2
+        local zeroAdjustedCurrent = inst.components.temperature.current - inst.components.temperature.mintemp
+        if (zeroAdjustedCurrent >= 50) then
+            multiplier = minMultiplier
+        elseif (zeroAdjustedCurrent <= 10) then
+            multiplier = maxMultiplier
+        elseif (zeroAdjustedCurrent > 10 or zeroAdjustedCurrent <= 30) then
+            multiplier = (-1/20) * zeroAdjustedCurrent + 2.5
+        elseif (zeroAdjustedCurrent > 30 and zeroAdjustedCurrent < 50) then
+            multiplier = (-1/40) * zeroAdjustedCurrent + 1.75
         end
-        -- If actually freezing, make super cold
-        if (freezing) then
-                inst.components.combat.damagemultiplier = .25
-        else 
-                inst.components.combat.damagemultiplier = 1
-        end
+        inst.components.combat.damagemultiplier = multipler
+        print("Set multiplier to " ..multiplier)
 
 end
 
