@@ -36,12 +36,57 @@ local assets = {
 }
 local prefabs = {}
 
-local badAnimalsToKill = {"rabbit", "beefalo"}
+badAnimalsToKill = {"Rabbit", "Beefalo"}
 
 local function killedSomething(inst, data)
 	-- THIS STILL DOES NOT WORK 
 	-- I DON'T KNOW WHY I CAN'T GET THE VICTIM OF THE ATTACK?!
-	print("Got killed event! Inst: ", inst)
+        -- local keyset={}
+        -- local n=0
+
+        -- -- for k,v in pairs(data.victim) do
+        --         n=n+1
+        --         keyset[n]=k
+        -- end
+        -- for _,v in pairs(keyset) do
+        --         print(v)
+        -- end
+--         D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    DynamicShadow
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    Transform
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    inlimbo
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    event_listening
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    data
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    brain
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    sounds
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    checktask
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    name
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    OnLoad
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    entity
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    AnimState
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    prefab
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    OnEntitySleep
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    israbbit
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    OnSave
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    CheckTransformState
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    Physics
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    iswinterrabbit
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    brainfn
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    SoundEmitter
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    OnEntityWake
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    pendingtasks
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    sg
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    spawntime
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    GUID
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    persists
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    event_listeners
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    components
+-- D:/Program Files/Steam/steamapps/common/dont_starve/data/../mods/niki/scripts/prefabs/niki.lua(52,1)    age
+        for _,v in pairs(badAnimalsToKill) do
+                if (v == data.victim.name) then
+                        inst.components.sanity:DoDelta(-20, 0)
+                        print("Lost 20 sanity for killing " .. v)
+                end
+        end
 end
 
 local fn = function(inst)
