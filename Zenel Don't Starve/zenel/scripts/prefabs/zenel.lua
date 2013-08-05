@@ -10,17 +10,6 @@ local prefabs = {}
 
 
 local function onFreezingChange(inst, data)
-        -- local freezing = false
-        -- if (inst.components.temperature.current < 0) then
-        --         freezing = true
-        -- end
-        -- -- If actually freezing, make super cold
-        -- if (freezing) then
-        --         inst.components.combat.damagemultiplier = .25
-        -- else 
-        --         inst.components.combat.damagemultiplier = 1
-        -- end
-
         local minMultiplier = .5
         local maxMultiplier = 2
         local zeroAdjustedCurrent = inst.components.temperature.current + inst.components.temperature.mintemp
@@ -111,7 +100,7 @@ end
 -- note: these are lower-case character name
 STRINGS.CHARACTER_TITLES.zenel = "The Coder"
 STRINGS.CHARACTER_NAMES.zenel = "Zenel"
-STRINGS.CHARACTER_DESCRIPTIONS.zenel = "*One with the computer demons.\n*More resistant to the cold.\n*Very weak when freezing."
+STRINGS.CHARACTER_DESCRIPTIONS.zenel = "*One with the computer demons.\n*Gets stronger when colder."
 STRINGS.CHARACTER_QUOTES.zenel = "\"¡A la chingada!\""
 
 -- You can also add any kind of custom dialogue that you would like. Don't forget to make
