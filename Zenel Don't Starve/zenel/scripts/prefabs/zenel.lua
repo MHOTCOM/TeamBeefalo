@@ -5,6 +5,10 @@ local MakePlayerCharacter = require "prefabs/player_common"
 local assets = {
         -- Don't forget to include your character's custom assets!
         Asset( "ANIM", "anim/zenel.zip" ),
+        Asset( "ANIM", "anim/zenel_cold.zip" ),
+        Asset( "ANIM", "anim/zenel_littlecold.zip" ),
+        Asset( "ANIM", "anim/zenel_littlehot.zip" ),
+        Asset( "ANIM", "anim/zenel_hot.zip" ),
 }
 local prefabs = {}
 
@@ -12,12 +16,17 @@ local prefabs = {}
 local function onFreezingChange(inst, data)
         local minMultiplier = .5
         local maxMultiplier = 2
+        local minSpeedMultiplier = .75
+        local maxSpeedMultiplier = 1.25
         local zeroAdjustedCurrent = inst.components.temperature.current + inst.components.temperature.mintemp
         local multiplier = 1
         if (zeroAdjustedCurrent >= 50) then
             multiplier = minMultiplier
             if (currentState ~= "Hot") then
                 currentState = "Hot"
+                inst.AnimState:SetBuild("zenel_hot")
+                inst.components.locomotor.walkspeed = TUNING.WILSON_WALK_SPEED * minSpeedMultiplier
+                inst.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED * minSpeedMultiplier
                 if (skipSaying) then
                     skipSaying = false
                     return
@@ -27,6 +36,9 @@ local function onFreezingChange(inst, data)
         elseif (zeroAdjustedCurrent <= 10) then
             multiplier = maxMultiplier
             if (currentState ~= "Cold") then
+                inst.AnimState:SetBuild("zenel_cold")
+                inst.components.locomotor.walkspeed = TUNING.WILSON_WALK_SPEED * maxSpeedMultiplier
+                inst.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED * maxSpeedMultiplier
                 currentState = "Cold"
                 if (skipSaying) then
                     skipSaying = false
@@ -38,6 +50,9 @@ local function onFreezingChange(inst, data)
             multiplier = (-1/20) * zeroAdjustedCurrent + 2.5
             if (currentState ~= "LittleCold") then
                 currentState = "LittleCold"
+                inst.AnimState:SetBuild("zenel_littlecold")
+                inst.components.locomotor.walkspeed = TUNING.WILSON_WALK_SPEED
+                inst.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED
                 if (skipSaying) then 
                     skipSaying = false
                     return
@@ -53,6 +68,9 @@ local function onFreezingChange(inst, data)
             multiplier = (-1/40) * zeroAdjustedCurrent + 1.75
             if (currentState ~= "LittleHot") then
                 currentState = "LittleHot"
+                inst.AnimState:SetBuild("zenel_littlehot")
+                inst.components.locomotor.walkspeed = TUNING.WILSON_WALK_SPEED
+                inst.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED
                 if (skipSaying) then
                     skipSaying = false
                     return
