@@ -12,12 +12,13 @@ local assets = {
 }
 local prefabs = {}
 
+minMultiplier = .5
+maxMultiplier = 2
+minSpeedMultiplier = .75
+maxSpeedMultiplier = 1.25
 
 local function onFreezingChange(inst, data)
-        local minMultiplier = .5
-        local maxMultiplier = 2
-        local minSpeedMultiplier = .75
-        local maxSpeedMultiplier = 1.25
+
         local zeroAdjustedCurrent = inst.components.temperature.current + inst.components.temperature.mintemp
         local multiplier = 1
         if (zeroAdjustedCurrent >= 50) then
