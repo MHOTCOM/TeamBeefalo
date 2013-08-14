@@ -34,37 +34,6 @@ local function onFreezingChange(inst, data)
                 end
                 inst.components.talker:Say("Oh my GOD it's so hot out. I feel so weak...")
             end
-        elseif (zeroAdjustedCurrent <= 10) then
-            multiplier = maxMultiplier
-            if (currentState ~= "Cold") then
-                inst.AnimState:SetBuild("zenel_cold")
-                inst.components.locomotor.walkspeed = TUNING.WILSON_WALK_SPEED * maxSpeedMultiplier
-                inst.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED * maxSpeedMultiplier
-                currentState = "Cold"
-                if (skipSaying) then
-                    skipSaying = false
-                    return 
-                end
-                inst.components.talker:Say("The winter's power fills me, I AM MIGHTY!")
-            end
-        elseif (zeroAdjustedCurrent > 10 and zeroAdjustedCurrent <= 30) then
-            multiplier = (-1/20) * zeroAdjustedCurrent + 2.5
-            if (currentState ~= "LittleCold") then
-                currentState = "LittleCold"
-                inst.AnimState:SetBuild("zenel_littlecold")
-                inst.components.locomotor.walkspeed = TUNING.WILSON_WALK_SPEED
-                inst.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED
-                if (skipSaying) then 
-                    skipSaying = false
-                    return
-                end
-                if (lastState ~= "Cold") then
-                    inst.components.talker:Say("Ahh, the cold is here. I feel my strength returning to me.")
-                else 
-                    inst.components.talker:Say("I'm warming up! I'm losing power!")
-                end
-
-            end
         elseif (zeroAdjustedCurrent > 30 and zeroAdjustedCurrent < 50) then
             multiplier = (-1/40) * zeroAdjustedCurrent + 1.75
             if (currentState ~= "LittleHot") then
@@ -83,9 +52,40 @@ local function onFreezingChange(inst, data)
                 end
             end
         end
+        elseif (zeroAdjustedCurrent > 10 and zeroAdjustedCurrent <= 30) then
+            multiplier = (-1/20) * zeroAdjustedCurrent + 2.5
+            if (currentState ~= "LittleCold") then
+                currentState = "LittleCold"
+                inst.AnimState:SetBuild("zenel_littlecold")
+                inst.components.locomotor.walkspeed = TUNING.WILSON_WALK_SPEED
+                inst.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED
+                if (skipSaying) then 
+                    skipSaying = false
+                    return
+                end
+                if (lastState ~= "Cold") then
+                    inst.components.talker:Say("Ahh, the cold is here. I feel my strength returning to me.")
+                else 
+                    inst.components.talker:Say("I'm warming up! I'm losing power!")
+                end
+
+            end
+        elseif (zeroAdjustedCurrent <= 10) then
+            multiplier = maxMultiplier
+            if (currentState ~= "Cold") then
+                inst.AnimState:SetBuild("zenel_cold")
+                inst.components.locomotor.walkspeed = TUNING.WILSON_WALK_SPEED * maxSpeedMultiplier
+                inst.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED * maxSpeedMultiplier
+                currentState = "Cold"
+                if (skipSaying) then
+                    skipSaying = false
+                    return 
+                end
+                inst.components.talker:Say("Ahh. The winter's power fills me...")
+            end
         inst.components.combat.damagemultiplier = multiplier
         lastState = currentState
-        -- print("Set multiplier to " .. multiplier .. " State: " .. currentState .. " Temp: " .. zeroAdjustedCurrent)
+        print("Set multiplier to " .. multiplier .. " State: " .. currentState .. " Temp0: " .. zeroAdjustedCurrent .. "Temp1: " .. inst.components.temperature.current)
 end
 
 currentState = "None"
@@ -380,7 +380,7 @@ STRINGS.CHARACTERS.ZENEL = {
         BUTTERFLYWINGS = "I'm haunted that I ripped these off of a buttefly.",
         CAMPFIRE =
         {
-                EMBERS = "No. Nono. Nononononononononon! DON'T GO OUT!",
+                EMBERS = "No. Nono. Nononononononononono! DON'T GO OUT!",
                 GENERIC = "It's warm, just the right amount of warm.",
                 HIGH = "Everyone knows bigger fires are better.",
                 LOW = "Hm, it could use a bit more fuel.",
