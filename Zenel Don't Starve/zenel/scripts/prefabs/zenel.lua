@@ -51,7 +51,6 @@ local function onFreezingChange(inst, data)
                     inst.components.talker:Say("At least it's a little bit cooler. I feel a little bit better.")
                 end
             end
-        end
         elseif (zeroAdjustedCurrent > 10 and zeroAdjustedCurrent <= 30) then
             multiplier = (-1/20) * zeroAdjustedCurrent + 2.5
             if (currentState ~= "LittleCold") then
@@ -83,6 +82,7 @@ local function onFreezingChange(inst, data)
                 end
                 inst.components.talker:Say("Ahh. The winter's power fills me...")
             end
+        end
         inst.components.combat.damagemultiplier = multiplier
         lastState = currentState
         print("Set multiplier to " .. multiplier .. " State: " .. currentState .. " Temp0: " .. zeroAdjustedCurrent .. "Temp1: " .. inst.components.temperature.current)
