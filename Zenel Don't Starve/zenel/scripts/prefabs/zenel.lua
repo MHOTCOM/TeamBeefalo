@@ -4,7 +4,6 @@ local MakePlayerCharacter = require "prefabs/player_common"
 
 local assets = {
         -- Don't forget to include your character's custom assets!
-        Asset( "ANIM", "anim/zenel.zip" ),
         Asset( "ANIM", "anim/zenel_cold.zip" ),
         Asset( "ANIM", "anim/zenel_littlecold.zip" ),
         Asset( "ANIM", "anim/zenel_littlehot.zip" ),
@@ -85,7 +84,7 @@ local function onFreezingChange(inst, data)
         end
         inst.components.combat.damagemultiplier = multiplier
         lastState = currentState
-        print("Set multiplier to " .. multiplier .. " State: " .. currentState .. " Temp0: " .. zeroAdjustedCurrent .. "Temp1: " .. inst.components.temperature.current)
+        -- print("Set multiplier to " .. multiplier .. " State: " .. currentState .. " Temp0: " .. zeroAdjustedCurrent .. "Temp1: " .. inst.components.temperature.current)
 end
 
 currentState = "None"
