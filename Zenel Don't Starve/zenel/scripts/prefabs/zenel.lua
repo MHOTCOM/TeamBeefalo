@@ -84,7 +84,7 @@ local function onFreezingChange(inst, data)
         end
         inst.components.combat.damagemultiplier = multiplier
         lastState = currentState
-        print("Set multiplier to " .. multiplier .. " State: " .. currentState .. " Temp0: " .. zeroAdjustedCurrent .. "Temp1: " .. inst.components.temperature.current)
+        -- print("Set multiplier to " .. multiplier .. " State: " .. currentState .. " Temp0: " .. zeroAdjustedCurrent .. "Temp1: " .. inst.components.temperature.current)
 end
 
 currentState = "None"
