@@ -4,7 +4,6 @@ local MakePlayerCharacter = require "prefabs/player_common"
 
 local assets = {
         -- Don't forget to include your character's custom assets!
-        Asset( "ANIM", "anim/zenel.zip" ),
         Asset( "ANIM", "anim/zenel_cold.zip" ),
         Asset( "ANIM", "anim/zenel_littlecold.zip" ),
         Asset( "ANIM", "anim/zenel_littlehot.zip" ),
@@ -32,7 +31,7 @@ local function onFreezingChange(inst, data)
                     skipSaying = false
                     return
                 end
-                inst.components.talker:Say("Oh my GOD it's so hot out. I feel so weak...")
+                inst.components.talker:Say("dI feel so weak...")
             end
         elseif (zeroAdjustedCurrent > 30 and zeroAdjustedCurrent < 50) then
             multiplier = (-1/40) * zeroAdjustedCurrent + 1.75
@@ -46,9 +45,9 @@ local function onFreezingChange(inst, data)
                     return
                 end
                 if (lastState ~= "Hot") then
-                    inst.components.talker:Say("Awh man, it's getting warmer... I feel my power leaving me.")
+                    inst.components.talker:Say("Awh man, it's getting warmer...")
                 else 
-                    inst.components.talker:Say("At least it's a little bit cooler. I feel a little bit better.")
+                    inst.components.talker:Say("At least it's a little bit cooler now...")
                 end
             end
         elseif (zeroAdjustedCurrent > 10 and zeroAdjustedCurrent <= 30) then
@@ -63,9 +62,9 @@ local function onFreezingChange(inst, data)
                     return
                 end
                 if (lastState ~= "Cold") then
-                    inst.components.talker:Say("Ahh, the cold is here. I feel my strength returning to me.")
+                    inst.components.talker:Say("Oh, it's a little bit more chilly now.")
                 else 
-                    inst.components.talker:Say("I'm warming up! I'm losing power!")
+                    inst.components.talker:Say("Well, at least it's not TOO hot.")
                 end
 
             end
@@ -80,7 +79,7 @@ local function onFreezingChange(inst, data)
                     skipSaying = false
                     return 
                 end
-                inst.components.talker:Say("Ahh. The winter's power fills me...")
+                inst.components.talker:Say("<Breathes Deeply> Ahhh... My season.")
             end
         end
         inst.components.combat.damagemultiplier = multiplier
