@@ -4,6 +4,7 @@ local MakePlayerCharacter = require "prefabs/player_common"
 
 local assets = {
         -- Don't forget to include your character's custom assets!
+        Asset( "ANIM", "anim/zenel.zip"),
         Asset( "ANIM", "anim/zenel_cold.zip" ),
         Asset( "ANIM", "anim/zenel_littlecold.zip" ),
         Asset( "ANIM", "anim/zenel_littlehot.zip" ),
@@ -31,7 +32,7 @@ local function onFreezingChange(inst, data)
                     skipSaying = false
                     return
                 end
-                inst.components.talker:Say("dI feel so weak...")
+                inst.components.talker:Say("I feel so weak...")
             end
         elseif (zeroAdjustedCurrent > 30 and zeroAdjustedCurrent < 50) then
             multiplier = (-1/40) * zeroAdjustedCurrent + 1.75
@@ -84,7 +85,7 @@ local function onFreezingChange(inst, data)
         end
         inst.components.combat.damagemultiplier = multiplier
         lastState = currentState
-        -- print("Set multiplier to " .. multiplier .. " State: " .. currentState .. " Temp0: " .. zeroAdjustedCurrent .. "Temp1: " .. inst.components.temperature.current)
+        print("Set multiplier to " .. multiplier .. " State: " .. currentState .. " Temp0: " .. zeroAdjustedCurrent .. "Temp1: " .. inst.components.temperature.current)
 end
 
 currentState = "None"
@@ -125,78 +126,78 @@ STRINGS.CHARACTER_QUOTES.zenel = "\"¡A la chingada!\""
 -- categores that don't exist yet using = {}
 -- note: these are UPPER-CASE charcacter name
 STRINGS.CHARACTERS.ZENEL = {
-	ACTIONFAIL =
-	{
-		SHAVE =
-		{
-			AWAKEBEEFALO = "Yeah sure, if I want to get gored.",
-			GENERIC = "I'm not going to waste this razor doing that.",
-			NOBITS = "There isn't even any stubble left!",
-		},
-		STORE =
-		{
-			GENERIC = "As much as I try, it's too full...",
-			NOTALLOWED = "Trying to put the triangle in the square slot, I see.",
-		},
-	},
-	ACTIONFAIL_GENERIC = "Hahahahahaha... No.",
-	ANNOUNCE_ADVENTUREFAIL = "I'm no adventurer, but that went really poorly.",
-	ANNOUNCE_BEES = "Awh hell nah! Bees!",
-	ANNOUNCE_BOOMERANG = "I think in Australia, one tries to catch those.",
-	ANNOUNCE_CHARLIE = "What in the actual fuck was that?",
-	ANNOUNCE_CHARLIE_ATTACK = "AUGH! MY LEG!",
-	ANNOUNCE_COLD = "",
-	ANNOUNCE_CRAFTING_FAIL = "I'm missing something here.",
-	ANNOUNCE_DEERCLOPS = "Oh no! Godzirra!",
-	ANNOUNCE_DUSK = "Better make a fire... I need light.",
-	ANNOUNCE_EAT =
-	{
-		GENERIC = "That wasn't half bad!",
-		PAINFUL = "Now to shit my insides out.",
-		SPOILED = "Augh! It was poison!",
-		STALE = "Something was almost very wrong with that.",
-	},
-	ANNOUNCE_ENTER_DARK = "Woah, I can't see my hand in front of my face.",
-	ANNOUNCE_ENTER_LIGHT = "Augh, my eyes need to adjust!",
-	ANNOUNCE_FREEDOM = "Free from tha chains of the white man!",
-	ANNOUNCE_HIGHRESEARCH = "I was smart before, but this is ridiculous.",
-	ANNOUNCE_HOUNDS = "The hounds, they cometh.",
-	ANNOUNCE_HUNGRY = "Fuuuck, I'm starving man!",
-	ANNOUNCE_HUNT_BEAST_NEARBY = "This track is fresh, the beast must be nearby.",
-	ANNOUNCE_HUNT_LOST_TRAIL = "The trail ends here.",
-	ANNOUNCE_INV_FULL = "I can't survive if I can't move my legs...",
-	ANNOUNCE_KNOCKEDOUT = "Great. How long was I out for?",
-	ANNOUNCE_LOWRESEARCH = "Thanks for teaching me nothing...",
-	ANNOUNCE_MOSQUITOS = "Die bloodsuckers!",
-	ANNOUNCE_NODANGERSLEEP = "Sure, I'l sleep when the whole world isn't out to kill me.",
-	ANNOUNCE_NODAYSLEEP = "No, it's WAY to bright out!",
-	ANNOUNCE_NOHUNGERSLEEP = "I'll probably die of starvation in my sleep...",
-	ANNOUNCE_NO_TRAP = "Well, okay then. Easy is good.",
-	ANNOUNCE_PECKED = "I WILL DESTROY YOU!",
-	ANNOUNCE_QUAKE = "What? This isnt California.",
-	ANNOUNCE_RESEARCH = "Gotta learn more to get out of here...",
-	ANNOUNCE_THORNS = "Pointy!",
-	ANNOUNCE_TORCH_OUT = "I hope that I have another one...",
-	ANNOUNCE_TRAP_WENT_OFF = "Haha. My bad.",
-	ANNOUNCE_UNIMPLEMENTED = "Error: Unimplemented. Just kidding. But seriously.",
-	ANNOUNCE_WORMHOLE = "Jumping into gaping assholes with teeth. Great idea...",
-	BATTLECRY =
-	{
-		GENERIC = "I'm the fuck you man!",
-		PIG = "Die mobile bacon!",
-		PREY = "You must die for my sustenance!",
-		SPIDER = "Die spider!",
-		SPIDER_WARRIOR = "Here's a weapon for your face!",
-	},
-	COMBAT_QUIT =
-	{
-		GENERIC = "You live. For now.",
-		PIG = "You're more useful to me alive anyway.",
-		PREY = "Damn those things run fast.",
-		SPIDER = "Yeah, leaving a man eating spider alive. Great idea.",
-		SPIDER_WARRIOR = "Great, let's leave a man eating spider warrior alive. I'm not going to get killed from it later.",
-	},
-	DESCRIBE =
+    ACTIONFAIL =
+    {
+        SHAVE =
+        {
+            AWAKEBEEFALO = "Yeah sure, if I want to get gored.",
+            GENERIC = "I'm not going to waste this razor doing that.",
+            NOBITS = "That's a recipe for razor burn...",
+        },
+        STORE =
+        {
+            GENERIC = "As much as I try, it's too full...",
+            NOTALLOWED = "Trying to put the triangle in the square slot, I see.",
+        },
+    },
+    ACTIONFAIL_GENERIC = "Hahahahahaha... No.",
+    ANNOUNCE_ADVENTUREFAIL = "I'm no adventurer, but that went really poorly.",
+    ANNOUNCE_BEES = "Awh hell nah! Bees!",
+    ANNOUNCE_BOOMERANG = "I think in Australia, one tries to catch those.",
+    ANNOUNCE_CHARLIE = "What in the actual fuck was that?",
+    ANNOUNCE_CHARLIE_ATTACK = "AUGH! MY LEG!",
+    ANNOUNCE_COLD = "",
+    ANNOUNCE_CRAFTING_FAIL = "I'm missing something here.",
+    ANNOUNCE_DEERCLOPS = "Oh no! Godzirra!",
+    ANNOUNCE_DUSK = "Better make a fire... I need light.",
+    ANNOUNCE_EAT =
+    {
+        GENERIC = "That wasn't half bad!",
+        PAINFUL = "Now to shit my insides out.",
+        SPOILED = "Augh! It was poison!",
+        STALE = "Something was almost very wrong with that.",
+    },
+    ANNOUNCE_ENTER_DARK = "Woah, I can't see my hand in front of my face.",
+    ANNOUNCE_ENTER_LIGHT = "Augh, my eyes need to adjust!",
+    ANNOUNCE_FREEDOM = "Free from tha chains of the white man!",
+    ANNOUNCE_HIGHRESEARCH = "I was smart before, but this is ridiculous.",
+    ANNOUNCE_HOUNDS = "Here doggy! Come get some!",
+    ANNOUNCE_HUNGRY = "Fuuuck, I'm starving man!",
+    ANNOUNCE_HUNT_BEAST_NEARBY = "I have GOT to be getting close now.",
+    ANNOUNCE_HUNT_LOST_TRAIL = "Augh. He got away`.",
+    ANNOUNCE_INV_FULL = "I can't survive if I can't move my legs...",
+    ANNOUNCE_KNOCKEDOUT = "Great. How long was I out for?",
+    ANNOUNCE_LOWRESEARCH = "Thanks for teaching me nothing...",
+    ANNOUNCE_MOSQUITOS = "Die bloodsuckers!",
+    ANNOUNCE_NODANGERSLEEP = "Sure, I'l sleep when the whole world isn't out to kill me.",
+    ANNOUNCE_NODAYSLEEP = "No, it's WAY to bright out!",
+    ANNOUNCE_NOHUNGERSLEEP = "I'll probably die of starvation in my sleep...",
+    ANNOUNCE_NO_TRAP = "Well, okay then. Easy is good.",
+    ANNOUNCE_PECKED = "I WILL DESTROY YOU!",
+    ANNOUNCE_QUAKE = "What? This isnt California.",
+    ANNOUNCE_RESEARCH = "Gotta learn more to get out of here...",
+    ANNOUNCE_THORNS = "Pointy!",
+    ANNOUNCE_TORCH_OUT = "I hope that I have another one...",
+    ANNOUNCE_TRAP_WENT_OFF = "Haha. My bad.",
+    ANNOUNCE_UNIMPLEMENTED = "Error: Unimplemented. Just kidding. But seriously.",
+    ANNOUNCE_WORMHOLE = "Jumping into gaping assholes with teeth. Great idea...",
+    BATTLECRY =
+    {
+        GENERIC = "I'm the fuck you man!",
+        PIG = "Die mobile bacon!",
+        PREY = "You must die for my sustenance!",
+        SPIDER = "Die spider!",
+        SPIDER_WARRIOR = "Here's a weapon for your face!",
+    },
+    COMBAT_QUIT =
+    {
+        GENERIC = "You live. For now.",
+        PIG = "You're more useful to me alive anyway.",
+        PREY = "Damn those things run fast.",
+        SPIDER = "Yeah, leaving a man eating spider alive. Great idea.",
+        SPIDER_WARRIOR = "Great, let's leave a man eating spider warrior alive. I'm not going to get killed from it later.",
+    },
+    DESCRIBE =
     {
         SLURPER = "Ew. What the fuck that is.?",
         ORANGEAMULET = "Your forcefield's good, but my teleporting is better.",
@@ -216,72 +217,72 @@ STRINGS.CHARACTERS.ZENEL = {
         STAFFLIGHT = "That's gonna...break something.",
         RESEARCHLAB4 = "What is this?",
 
-   		ANCIENT_ALTAR = "I wonder if Cthulu crashed here once or twice.",
-	    CAVE_BANANA = "BANANAAAAAAA!",
-	    CAVE_BANANA_COOKED = "Cooked... BANANAAAAAAA",
-	    CAVE_BANANA_TREE = "Hory shet. They MAKE TREES OF THESE.",
-	    ROCKY = "It has terrifying claws.",
-	    
-	    COMPASS =
-	    {
-	            GENERIC="I can't get a reading",
-	            N = "North",
-	            S = "South",
-	            E = "East",
-	            W = "West",
-	            NE = "Northeast",
-	            SE = "Southeast",
-	            NW = "Northwest",
-	            SW = "Southwest",
-	    },
-	    HOUNDSTOOTH="You'd be more threatening in a hound's mouth.",
-	    ARMORSNURTLESHELL="I can't believe that I'm thinking of wearing this.",
-	    BAT="Fuck you, I'm Batman.",
-	    BATBAT = "Shouldn't it be called (Bat)^2?",
-	    BATWING="Better dead. Fuck bats.",
-	    BATWING_COOKED="It smells worse when cooked...",
-	    BEDROLL_FURRY="It's disgustingly warm.",
-	    BUNNYMAN="Crikey! Look a random furry in it's natural habitat!",
-	    FLOWER_CAVE="Is that flower glowing?",
-	    FLOWER_CAVE_DOUBLE="Is that flower glowing?",
-	    FLOWER_CAVE_TRIPLE="Is that flower glowing?",
-	    GUANO="That's batshit... crazy.",
-	    LANTERN="I feel like a Tonberry is nearby.",
-	    LIGHTBULB="I wonder if you can use this as a lightbulb?",
-	    MANRABBIT_TAIL="Ooh, furry tail!",
-	    MUSHTREE_TALL  ="DUDE. DO YOU WANT TO DO SOME SHROOMS?",
-	    MUSHTREE_MEDIUM="That's a moderately large shroom.",
-	    MUSHTREE_SMALL ="It's \"magic\"",
-	    RABBITHOUSE="It's like Spongebob. But not at all.",
-	    SLURTLE="Ah, hello shell eel.",
-	    SLURTLE_SHELLPIECES="Now how do you go back together?",
-	    SLURTLEHAT="Please don't put this on.",
-	    SLURTLEHOLE="How about no?",
-	    SLURTLESLIME="Why did you pick this up? It's got the consistency of cum...",
-	    SNURTLE="Ah, a snail...eel.",
-	    SPIDER_HIDER="Oh good, they hide now.",
-	    SPIDER_SPITTER="Pthew, I spit on you.",
-	    SPIDERHOLE="That's a whole lot of nope.",
-	    STALAGMITE="Pointy and vertical. Perfect.",
-	    STALAGMITE_FULL="Woo. More damn rocks.",
-	    STALAGMITE_LOW="Woo. More damn rocks.",
-	    STALAGMITE_MED="Woo. More damn rocks.",
-	    STALAGMITE_TALL="Ooh these ones are as tall as me!",
-	    STALAGMITE_TALL_FULL="Ooh these ones are as tall as me!",
-	    STALAGMITE_TALL_LOW="Ooh these ones are as tall as me!",
-	    STALAGMITE_TALL_MED="Ooh these ones are as tall as me!",
-	    TURF_FUNGUS="Ground. That is all.",
-	    TURF_MUD="Ground. That is all.",
-	    TURF_SINKHOLE="Ground. That is all.",
-	    TURF_UNDERROCK="Ground. That is all.",      
+        ANCIENT_ALTAR = "I wonder if Cthulu crashed here once or twice.",
+        CAVE_BANANA = "BANANAAAAAAA!",
+        CAVE_BANANA_COOKED = "Cooked... BANANAAAAAAA",
+        CAVE_BANANA_TREE = "Hory shet. They MAKE TREES OF THESE.",
+        ROCKY = "It has terrifying claws.",
+        
+        COMPASS =
+        {
+                GENERIC="I can't get a reading",
+                N = "North",
+                S = "South",
+                E = "East",
+                W = "West",
+                NE = "Northeast",
+                SE = "Southeast",
+                NW = "Northwest",
+                SW = "Southwest",
+        },
+        HOUNDSTOOTH="You'd be more threatening in a hound's mouth.",
+        ARMORSNURTLESHELL="I can't believe that I'm thinking of wearing this.",
+        BAT="Fuck you, I'm Batman.",
+        BATBAT = "Shouldn't it be called (Bat)^2?",
+        BATWING="Better dead. Fuck bats.",
+        BATWING_COOKED="It smells worse when cooked...",
+        BEDROLL_FURRY="It's disgustingly warm.",
+        BUNNYMAN="Crikey! Look a random furry in it's natural habitat!",
+        FLOWER_CAVE="Is that flower glowing?",
+        FLOWER_CAVE_DOUBLE="Is that flower glowing?",
+        FLOWER_CAVE_TRIPLE="Is that flower glowing?",
+        GUANO="That's batshit... crazy.",
+        LANTERN="I feel like a Tonberry is nearby.",
+        LIGHTBULB="I wonder if you can use this as a lightbulb?",
+        MANRABBIT_TAIL="Ooh, furry tail!",
+        MUSHTREE_TALL  ="DUDE. DO YOU WANT TO DO SOME SHROOMS?",
+        MUSHTREE_MEDIUM="That's a moderately large shroom.",
+        MUSHTREE_SMALL ="It's \"magic\"",
+        RABBITHOUSE="It's like Spongebob. But not at all.",
+        SLURTLE="Ah, hello shell eel.",
+        SLURTLE_SHELLPIECES="Now how do you go back together?",
+        SLURTLEHAT="Please don't put this on.",
+        SLURTLEHOLE="How about no?",
+        SLURTLESLIME="Why did you pick this up? It's got the consistency of cum...",
+        SNURTLE="Ah, a snail...eel.",
+        SPIDER_HIDER="Oh good, they hide now.",
+        SPIDER_SPITTER="Pthew, I spit on you.",
+        SPIDERHOLE="That's a whole lot of nope.",
+        STALAGMITE="Pointy and vertical. Perfect.",
+        STALAGMITE_FULL="Woo. More damn rocks.",
+        STALAGMITE_LOW="Woo. More damn rocks.",
+        STALAGMITE_MED="Woo. More damn rocks.",
+        STALAGMITE_TALL="Ooh these ones are as tall as me!",
+        STALAGMITE_TALL_FULL="Ooh these ones are as tall as me!",
+        STALAGMITE_TALL_LOW="Ooh these ones are as tall as me!",
+        STALAGMITE_TALL_MED="Ooh these ones are as tall as me!",
+        TURF_FUNGUS="Ground. That is all.",
+        TURF_MUD="Ground. That is all.",
+        TURF_SINKHOLE="Ground. That is all.",
+        TURF_UNDERROCK="Ground. That is all.",      
 
-	    POWCAKE = "Why would I bother eating this?",
-	    CAVE_ENTRANCE = 
-	    {
-	        GENERIC="I bet I could move that rock.",
-	        OPEN = "I really don't want to go down there. It's dark.",
-	    },
-	    CAVE_EXIT = "Fuck that dark, dank hole.",
+        POWCAKE = "Why would I bother eating this?",
+        CAVE_ENTRANCE = 
+        {
+            GENERIC="I bet I could move that rock.",
+            OPEN = "I really don't want to go down there. It's dark.",
+        },
+        CAVE_EXIT = "Fuck that dark, dank hole.",
         MAXWELLPHONOGRAPH = "Ah, the source of the music.",
         BOOMERANG = "Looks like I'm going down under. That means two things.",
         PIGGUARD = "Hey it's just another prick at the door.",
@@ -374,7 +375,7 @@ STRINGS.CHARACTERS.ZENEL = {
         {
                 GENERIC = "Oh, haven't seen one of you in a while.",
                 HELD = "I'm sorry, but I need to use you for something.",
-        },
+        },                   
         BUTTERFLYMUFFIN = "A butterfly muffin. I bet it doesn't taste good.",
         BUTTERFLYWINGS = "I'm haunted that I ripped these off of a buttefly.",
         CAMPFIRE =
@@ -393,9 +394,9 @@ STRINGS.CHARACTERS.ZENEL = {
         CARROT_SEEDS = "Oh, I bet I could make a new carrot with this.",
         CAVE_FERN = "What is a fern doing down here?",
         CHARCOAL = "Kinda smells like a dead fire looks.",
-	    CHESSJUNK1 = "Not like I would have anyone to play chess with anyway.",
-	    CHESSJUNK2 = "I kinda want to play some chess. Kinda.",
-	    CHESSJUNK3 = "Maybe I could fix them any play myself?",
+        CHESSJUNK1 = "Not like I would have anyone to play chess with anyway.",
+        CHESSJUNK2 = "I kinda want to play some chess. Kinda.",
+        CHESSJUNK3 = "Maybe I could fix them any play myself?",
         CHESTER = "That pumpkin has a mouth.",
         CHESTER_EYEBONE =
         {
@@ -409,7 +410,7 @@ STRINGS.CHARACTERS.ZENEL = {
         COOKPOT =
         {
                 COOKING_LONG = "TO HUNGRY TO WAIT.",
-                COOKING_SHORT = "Thank god, it's nearly done.!",
+                COOKING_SHORT = "Thank god, it's nearly done.",
                 DONE = "DINNER TIME!",
                 EMPTY = "I really don't want to cook, but I'm so hungry.",
         },
@@ -776,7 +777,7 @@ STRINGS.CHARACTERS.ZENEL = {
         },
         ROCK = "That's a big ass rock.",
         ROCKS = "Maybe I can make something with these.",
-		ROOK = "Storm the castle!",
+        ROOK = "Storm the castle!",
         ROPE = "Some rope.",
         ROTTENEGG = "Smells like a hot spring.",
         SANITYROCK =
